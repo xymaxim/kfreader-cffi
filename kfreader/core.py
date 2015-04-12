@@ -6,7 +6,7 @@ from cffi import FFI
 TYPEDECLS = {
     1: 'int[]',
     2: 'double[]',
-    3: 'char *',
+    3: 'char *'
 }
 
 ffi = FFI()
@@ -50,13 +50,16 @@ class KFReader:
         self._kf = ffi.new('KFFile *')
         C.openKFFile(self._kf, filename.encode())
 
-    def get_data(self, section, variable):
-        name = '{}%{}'.format(section, variable).encode()
+    def get_data(self, section, var):
+        name = '{}%{}'.format(section, var).encode()
         length = C.getKFVariableLength(self._kf, name)
+        if length == -1:
+            message = "Could not find variable '{}' in section '{}'"
+            raise RuntimeError(message.format(var, section))
         atype = C.getKFVariableType(self._kf, name)
 
         if atype == C.KF_T_STRING:
-            cdata = ffi.new('char*')
+            cdata = ffi.new('char[]', length)
             C.getKFData(self._kf, name, cdata)
             return ffi.string(cdata).decode().rstrip()
         else:
