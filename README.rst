@@ -1,7 +1,10 @@
 kfreader-cffi
 ===================
 
-It uses cffi_ to interface with the original C library KFReader_.
+kfreader-cffi is a Python package for reading binary result files produced by
+the Amsterdam Density Functional (ADF) program suite (http://scm.com). Instead of kf.py_, this package does not require working ADF installation.
+
+It uses CFFI_ to interface with the original C library KFReader_.
 
 Installation
 ------------
@@ -59,6 +62,7 @@ Acknowledgments
 Many thanks to Alexei Yakovlev and all the other developers (http://scm.com) of the original C routines.
 This package would not exist without their work.
 
-.. _cffi: https://cffi.readthedocs.org/
+.. _kf.py: http://www.scm.com/Downloads/2014/
+.. _CFFI: https://cffi.readthedocs.org/
 .. _KFReader: http://www.scm.com/Downloads/2014/
 .. _documentation: http://www.scm.com/Doc/Doc2014/ADF/ADFUsersGuide/page334.html
