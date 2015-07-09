@@ -56,7 +56,7 @@ Usage
 Acknowledgments
 ---------------
 
-Many thanks to Alexei Yakovlev and other SCM developers for their work on the original C routines.
+Many thanks to Alexei Yakovlev and all the other developers (http://scm.com) of the original C routines.
 This package would not exist without their work.
 
 .. _cffi: https://cffi.readthedocs.org/
