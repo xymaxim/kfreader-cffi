@@ -41,8 +41,8 @@ int     getKFVariableType       (KFFile *kf, const char *name);
 int     getKFData               (KFFile *kf, const char *name, void *buf);
 """)
 
-here = lambda *x: os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
-C = ffi.dlopen(here('../lib/libkfreader.so'))
+this_dir = os.path.abspath(os.path.dirname(__file__))
+C = ffi.dlopen(os.path.join(this_dir, 'lib/libkfreader.so'))
 
 
 class KFReader:
@@ -50,7 +50,24 @@ class KFReader:
         self._kf = ffi.new('KFFile *')
         C.openKFFile(self._kf, filename.encode())
 
-    def get_data(self, section, var):
+    def _get_string(self, name, length, is_continuous):
+        cdata = ffi.new('char[]', length)
+        C.getKFData(self._kf, name, cdata)
+        data = ffi.string(cdata).decode()
+
+        num_blocks = length // 160
+        if num_blocks == 1:
+            rv = data.rstrip()
+        else:
+            lines = []
+            for i in range(0, length, 160):
+                line = data[i:i+160]
+                lines.append(line.rstrip())
+            rv = ''.join(lines) if is_continuous else ','.join(lines)
+
+        return rv
+
+    def get_data(self, section, var, is_str_continuous=False):
         name = '{}%{}'.format(section, var).encode()
         length = C.getKFVariableLength(self._kf, name)
         if length == -1:
@@ -59,9 +76,7 @@ class KFReader:
         atype = C.getKFVariableType(self._kf, name)
 
         if atype == C.KF_T_STRING:
-            cdata = ffi.new('char[]', length)
-            C.getKFData(self._kf, name, cdata)
-            return ffi.string(cdata).decode().rstrip()
+            return self._get_string(name, length, is_str_continuous)
         else:
             cdata = ffi.new(TYPEDECLS[atype], length)
             C.getKFData(self._kf, name, cdata)

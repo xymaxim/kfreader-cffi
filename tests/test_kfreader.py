@@ -24,8 +24,7 @@ class TestKFReader(unittest.TestCase):
 
     def test_non_existent_variable(self):
         with self.assertRaises(RuntimeError):
-            self.kfr.get_data('non', 'existent')
-
+            self.kfr.get_data('does not', 'exist')
 
     def tearDown(self):
         self.kfr.close()
