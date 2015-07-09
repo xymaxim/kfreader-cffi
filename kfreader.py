@@ -6,7 +6,8 @@ from cffi import FFI
 TYPEDECLS = {
     1: 'int[]',
     2: 'double[]',
-    3: 'char *'
+    3: 'char *',
+    4: 'int *'
 }
 
 ffi = FFI()

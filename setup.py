@@ -21,6 +21,7 @@ class develop(_develop):
         _develop.run(self)
         self.execute(post_hook, [], build_msg)
 
+
 setup(
     cmdclass={
         'install': install,
@@ -29,7 +30,6 @@ setup(
     name='kffreader-cffi',
     version='0.1.0',
     url='https://github.com/mstolyarchuk/kfreader-cffi',
-    license='BSD',
     author='Maxim Stolyarchuk',
     author_email='maxim.stolyarchuk@gmail.com',
     description='Python bindings for KFReader, a library from the ADF computational chemistry package',

@@ -22,6 +22,10 @@ class TestKFReader(unittest.TestCase):
         x = self.kfr.get_data('General', 'runtype')
         self.assertEqual(x, 'GEOMETRY OPTIMIZATION')
 
+    def test_logical(self):
+        x = self.kfr.get_data('General', 'lhybrid')
+        self.assertFalse(x, 0)
+
     def test_non_existent_variable(self):
         with self.assertRaises(RuntimeError):
             self.kfr.get_data('does not', 'exist')
