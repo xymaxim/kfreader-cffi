@@ -49,7 +49,9 @@ C = ffi.dlopen(os.path.join(this_dir, 'lib/libkfreader.so'))
 class KFReader:
     def __init__(self, filename):
         self._kf = ffi.new('KFFile *')
-        C.openKFFile(self._kf, filename.encode())
+        if -1 == C.openKFFile(self._kf, filename.encode()):
+            msg = "File does not exist or has unexpected format"
+            raise Exception(msg)
 
     def _get_string(self, name, length, is_continuous):
         cdata = ffi.new('char[]', length)
@@ -84,4 +86,5 @@ class KFReader:
             return cdata[0] if length == 1 else list(cdata)
 
     def close(self):
+        print('close!')
         C.closeKFFile(self._kf)
