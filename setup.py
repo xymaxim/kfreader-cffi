@@ -28,7 +28,7 @@ setup(
         'develop': develop
     },
     name='kffreader-cffi',
-    version='0.2.0',
+    version='0.2.1',
     url='https://github.com/mstolyarchuk/kfreader-cffi',
     author='Maxim Stolyarchuk',
     author_email='maxim.stolyarchuk@gmail.com',
