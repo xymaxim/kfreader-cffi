@@ -32,3 +32,18 @@ class TestKFReader(unittest.TestCase):
 
     def tearDown(self):
         self.kfr.close()
+
+
+class TestInvalidFileInput(unittest.TestCase):
+    def setUp(self):
+        cffi.verifier.cleanup_tmpdir()
+        self.kfr = KFReader()
+
+    def test_non_existent_file(self):
+        self.assertRaises(Exception, self.kfr.open, '/does/not/exist')
+
+    def test_unexpected_format(self):
+        self.assertRaises(Exception, self.kfr.open, 'tests/empty.txt')
+
+    def tearDown(self):
+        self.kfr.close()
