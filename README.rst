@@ -9,22 +9,22 @@ It uses CFFI_ to interface with the original C library KFReader_.
 Installation
 ------------
 
-*Note that kfreader-cffi currently is only tested under Python3.\* on Ubuntu*
+*Note that kfreader-cffi currently is only tested under Python 3.x on Ubuntu*
 
-First we need to install some prerequisites
+First we need to install some prerequisites:
 
 .. code:: sh
 
   sudo apt-get update
   sudo apt-get install gcc make cmake python3-dev libffi-dev
 
-Then to install the package, simply
+Then to install the package, simply:
 
 .. code:: sh
 
   pip install kfreader-cffi
   
-Or for development
+Or for development:
 
 .. code:: sh
   
