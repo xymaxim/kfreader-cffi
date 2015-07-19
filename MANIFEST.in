@@ -1,0 +1,3 @@
+include Makefile
+recursive-include kfreader/vendor *
+exclude kfreader/vendor/libkfreader.so
