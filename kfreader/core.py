@@ -43,7 +43,7 @@ int     getKFData               (KFFile *kf, const char *name, void *buf);
 """)
 
 this_dir = os.path.abspath(os.path.dirname(__file__))
-C = ffi.dlopen(os.path.join(this_dir, 'lib/libkfreader.so'))
+C = ffi.dlopen(os.path.join(this_dir, 'vendor/libkfreader.so'))
 
 
 class KFReader:

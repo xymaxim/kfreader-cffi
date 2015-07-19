@@ -1,9 +1,10 @@
 C = gcc -Wall -Wno-unused-function
+vendor = kfreader/vendor
 
 all: libkfreader.so
 
 libkfreader.so:
-	cd lib && $(C) -fPIC -c *.c && $(C) -shared -o libkfreader.so *.o
+	cd $(vendor) && $(C) -fPIC -c *.c && $(C) -shared -o libkfreader.so *.o
 
 clean:
-	rm -f lib/libkfreader.so lib/*.o
+	rm -f $(vendor)/libkfreader.so $(vendor)/*.o
