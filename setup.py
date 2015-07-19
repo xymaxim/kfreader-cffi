@@ -1,7 +1,7 @@
 import subprocess
 from setuptools import setup
-from setuptools.command.install import install as _install
-from setuptools.command.develop import develop as _develop
+from setuptools.command.install import install
+from setuptools.command.develop import develop
 
 
 build_msg = "Building shared library libkfreader.so"
@@ -10,22 +10,22 @@ def post_hook():
     subprocess.call(['make', 'libkfreader.so'])
 
 
-class install(_install):
+class install_command(install):
     def run(self):
-        _install.run(self)
+        install.run(self)
         self.execute(post_hook, [], build_msg)
 
 
-class develop(_develop):
+class develop_command(develop):
     def run(self):
-        _develop.run(self)
+        develop.run(self)
         self.execute(post_hook, [], build_msg)
 
 
 setup(
     cmdclass={
-        'install': install,
-        'develop': develop
+        'install': install_command,
+        'develop': develop_command
     },
     name='kfreader-cffi',
     version='0.2.1',
