@@ -32,7 +32,7 @@ Or for development:
   pip install -e kfreader-cffi
 
 Shared library ``libkfreader.so`` will be *automatically* built from C source files
-provided in /lib directory during the installation process
+provided in /vendor directory during the installation process
 (see ``Makefile`` for details).
   
 Now you are ready to go!
