@@ -58,6 +58,7 @@ class KFReader:
 
     def open(self, filename):
         self._kf = ffi.new('KFFile *')
+        # TODO Suppress stderr messages while opening a file.
         if -1 == C.openKFFile(self._kf, filename.encode()):
             msg = "File does not exist or has unexpected format"
             raise KFFileReadingError(msg)
