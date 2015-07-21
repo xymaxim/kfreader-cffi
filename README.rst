@@ -15,8 +15,8 @@ First we need to install some prerequisites:
 
 .. code:: sh
 
-  sudo apt-get update
-  sudo apt-get install gcc make cmake python3-dev libffi-dev
+  apt-get update
+  apt-get install build-essential gcc libffi-dev python3-dev
 
 Then to install the package, simply:
 
