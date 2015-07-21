@@ -1,6 +1,9 @@
 kfreader-cffi
 ===================
 
+.. image:: https://travis-ci.org/mstolyarchuk/kfreader-cffi.svg?branch=master
+    :target: https://travis-ci.org/mstolyarchuk/kfreader-cffi
+
 kfreader-cffi is a Python package for reading binary result files produced by
 the Amsterdam Density Functional (ADF) program suite (http://scm.com). Instead of kf.py_, this package does not require working ADF installation.
 
