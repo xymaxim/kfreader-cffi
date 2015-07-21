@@ -1,4 +1,5 @@
-import os.path
+import os
+from contextlib import contextmanager
 
 from cffi import FFI
 
@@ -46,6 +47,10 @@ this_dir = os.path.abspath(os.path.dirname(__file__))
 C = ffi.dlopen(os.path.join(this_dir, 'vendor/libkfreader.so'))
 
 
+class KFFileReadingError(BaseException):
+    pass
+
+
 class KFReader:
     def __init__(self, filename=None):
         if filename is not None:
@@ -55,7 +60,7 @@ class KFReader:
         self._kf = ffi.new('KFFile *')
         if -1 == C.openKFFile(self._kf, filename.encode()):
             msg = "File does not exist or has unexpected format"
-            raise Exception(msg)
+            raise KFFileReadingError(msg)
 
     def _get_string(self, name, length, is_continuous):
         cdata = ffi.new('char[]', length)
@@ -78,8 +83,8 @@ class KFReader:
         name = '{}%{}'.format(section, var).encode()
         length = C.getKFVariableLength(self._kf, name)
         if length == -1:
-            message = "Could not find variable '{}' in section '{}'"
-            raise RuntimeError(message.format(var, section))
+            msg = "Could not find variable '{}' in section '{}'"
+            raise RuntimeError(msg.format(var, section))
         atype = C.getKFVariableType(self._kf, name)
 
         if atype == C.KF_T_STRING:
@@ -91,3 +96,23 @@ class KFReader:
 
     def close(self):
         C.closeKFFile(self._kf)
+
+
+@contextmanager
+def kfropen(filename):
+    """FIX This method should be renamed to make more clear it returns
+    the KFReader instance (e.g., get_kfreader() or simply kfreader()).
+    """
+    kfr = KFReader()
+
+    # Does this hurt? No?
+    try:
+        kfr.open(filename)
+        yield kfr
+    except KFFileReadingError as e:
+        raise(e)
+    except Exception as e:
+        kfr.close()
+        raise(e)
+    else:
+        kfr.close()

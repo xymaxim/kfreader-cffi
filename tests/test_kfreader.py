@@ -1,9 +1,12 @@
-import unittest
+from unittest import TestCase
+from unittest.mock import patch
+
 import cffi.verifier
-from kfreader import KFReader
+
+from kfreader import KFReader, KFFileReadingError, kfropen
 
 
-class TestKFReader(unittest.TestCase):
+class TestKFReader(TestCase):
     def setUp(self):
         cffi.verifier.cleanup_tmpdir()
         self.kfr = KFReader('tests/TAPE21')
@@ -30,20 +33,32 @@ class TestKFReader(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             self.kfr.get_data('does not', 'exist')
 
+    def test_contextmanager(self):
+        with kfropen('tests/TAPE21') as kfr:
+            assert kfr != None
+
+    @patch('kfreader.KFReader.close')
+    def test_raised_contextmanager(self, mock_close):
+        with self.assertRaises(KFFileReadingError):
+            with kfropen('nonexistent_file') as kfr:
+                pass
+        assert not mock_close.called
+
     def tearDown(self):
         self.kfr.close()
 
 
-class TestInvalidFileInput(unittest.TestCase):
+class TestInvalidFileInput(TestCase):
     def setUp(self):
         cffi.verifier.cleanup_tmpdir()
         self.kfr = KFReader()
 
     def test_non_existent_file(self):
-        self.assertRaises(Exception, self.kfr.open, '/does/not/exist')
+        self.assertRaises(KFFileReadingError, self.kfr.open, '/does/not/exist')
 
     def test_unexpected_format(self):
-        self.assertRaises(Exception, self.kfr.open, 'tests/empty.txt')
+        self.assertRaises(KFFileReadingError, self.kfr.open, 'tests/empty.txt')
 
     def tearDown(self):
-        self.kfr.close()
+        # self.kfr.close()
+        pass

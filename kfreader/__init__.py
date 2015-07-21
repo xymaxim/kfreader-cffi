@@ -1,1 +1,1 @@
-from .core import KFReader
+from .core import KFReader, KFFileReadingError, kfropen
