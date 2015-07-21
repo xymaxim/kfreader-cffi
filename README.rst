@@ -15,8 +15,8 @@ First we need to install some prerequisites:
 
 .. code:: sh
 
-  sudo apt-get update
-  sudo apt-get install gcc make cmake python3-dev libffi-dev
+  apt-get update
+  apt-get install build-essential gcc libffi-dev python3-dev
 
 Then to install the package, simply:
 
@@ -32,7 +32,7 @@ Or for development:
   pip install -e kfreader-cffi
 
 Shared library ``libkfreader.so`` will be *automatically* built from C source files
-provided in /lib directory during the installation process
+provided in /vendor directory during the installation process
 (see ``Makefile`` for details).
   
 Now you are ready to go!
