@@ -3,6 +3,7 @@
 *.o
 *.so
 ve/
+build/
 dist/
 *.egg-info/
 __pycache__/

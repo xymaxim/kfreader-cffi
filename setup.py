@@ -2,6 +2,7 @@ import subprocess
 from setuptools import setup
 from setuptools.command.install import install
 from setuptools.command.develop import develop
+from setuptools.command.build_py import build_py
 
 
 build_msg = "Building shared library libkfreader.so"
@@ -23,13 +24,20 @@ class develop_command(develop):
         develop.run(self)
 
 
+class build_py_command(build_py):
+    def run(self):
+        self.execute(post_hook, [], build_msg)
+        build_py.run(self)
+
+
 setup(
     cmdclass={
         'install': install_command,
-        'develop': develop_command
+        'develop': develop_command,
+        'build_py': build_py_command
     },
     name='kfreader-cffi',
-    version='0.2.2',
+    version='0.2.3',
     url='https://github.com/mstolyarchuk/kfreader-cffi',
     author='Maxim Stolyarchuk',
     author_email='maxim.stolyarchuk@gmail.com',
