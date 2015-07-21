@@ -47,7 +47,7 @@ this_dir = os.path.abspath(os.path.dirname(__file__))
 C = ffi.dlopen(os.path.join(this_dir, 'vendor/libkfreader.so'))
 
 
-class KFFileReadingError(BaseException):
+class KFFileReadingError(Exception):
     pass
 
 
