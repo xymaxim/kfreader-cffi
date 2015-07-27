@@ -51,13 +51,22 @@ Usage
 
 .. code:: python
 
-	>>> from kfreader import KFReader
+	>>> from kfreader import KFReader, kfropen
 	
+	# Open a TAPE21 file.
 	>>> kfr = KFReader('file.t21')
-	>>> kfr.get_data('General', 'termination status')
-	'NORMAL TERMINATION'
-	
+	# Get the value of a variable given its section and name.
+	>>> kfr.get_data('General', 'file-ident')
+	'TAPE21'
 	>>> kfr.close()
+	
+	# We can also seamlessly use the with-statement.
+	# Let's simplify the above example:
+	>>> with kfropen('file.t21') as kfr:
+	>>>	# Use the reader as regular. The file will be closed
+	>>>     # when the block ends.
+	>>>     print(kfr.get_data('General', 'termination status'))
+	'NORMAL TERMINATION'
 
 Acknowledgments
 ---------------
