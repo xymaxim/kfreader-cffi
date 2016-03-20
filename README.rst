@@ -77,4 +77,4 @@ This package would not exist without their work.
 .. _kf.py: http://www.scm.com/Downloads/2014/
 .. _CFFI: https://cffi.readthedocs.org/
 .. _KFReader: http://www.scm.com/Downloads/2014/
-.. _documentation: http://www.scm.com/Doc/Doc2014/ADF/ADFUsersGuide/page334.html
+.. _documentation: https://www.scm.com/documentation/ADF/Appendices/TAPE21/
