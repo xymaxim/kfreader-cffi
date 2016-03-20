@@ -101,9 +101,6 @@ class KFReader:
 
 @contextmanager
 def kfropen(filename):
-    """FIX This method should be renamed to make more clear it returns
-    the KFReader instance (e.g., get_kfreader() or simply kfreader()).
-    """
     kfr = KFReader()
 
     # Does this hurt? No?
