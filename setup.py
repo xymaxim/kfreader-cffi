@@ -37,7 +37,7 @@ setup(
         'build_py': build_py_command
     },
     name='kfreader-cffi',
-    version='0.2.3',
+    version='0.2.4',
     url='https://github.com/mstolyarchuk/kfreader-cffi',
     author='Maxim Stolyarchuk',
     author_email='maxim.stolyarchuk@gmail.com',
