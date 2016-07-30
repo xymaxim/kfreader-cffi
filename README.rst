@@ -1,5 +1,6 @@
 kfreader-cffi
 ===================
+*This project has been DEPRECATED because now* PLAMS_ *supports a native Python way to read binary result files*
 
 .. image:: https://travis-ci.org/mstolyarchuk/kfreader-cffi.svg?branch=master
     :target: https://travis-ci.org/mstolyarchuk/kfreader-cffi
@@ -77,4 +78,5 @@ This package would not exist without their work.
 .. _kf.py: http://www.scm.com/Downloads/2014/
 .. _CFFI: https://cffi.readthedocs.org/
 .. _KFReader: http://www.scm.com/Downloads/2014/
+.. _PLAMS: https://www.scm.com/PLAMS/intro.html#what-is-plams/
 .. _documentation: https://www.scm.com/documentation/ADF/Appendices/TAPE21/
